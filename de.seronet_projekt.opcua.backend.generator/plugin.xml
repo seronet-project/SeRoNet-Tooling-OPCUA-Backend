@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.xtext.service.communicationObject.CommunicationObjectGeneratorEP">
+      <generator
+            class="de.seronet_projekt.opcua.backend.generator.commObj.OpcUaCommObjectGenerator">
+      </generator>
+   </extension>
+   <extension
+         point="org.xtend.smartsoft.generator.DomainModelsGeneratorExtension">
+      <DomainModelsGeneratorExtension
+            class="de.seronet_projekt.opcua.backend.generator.OpcUaDomainModelsExtension">
+      </DomainModelsGeneratorExtension>
+   </extension>
+   <extension
+         point="org.xtext.component.componentDefinition.ComponentDefinitionGeneratorEP">
+      <generator
+            class="de.seronet_projekt.opcua.backend.generator.component.OpcUaComponentGenerator">
+      </generator>
+   </extension>
+   <extension
+         point="org.xtend.smartsoft.generator.ComponentGeneratorExtension">
+      <ComponentGeneratorExtension
+            class="de.seronet_projekt.opcua.backend.generator.component.ext.OpcUaComponentGeneratorExtension">
+      </ComponentGeneratorExtension>
+   </extension>
+
+</plugin>
