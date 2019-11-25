@@ -121,10 +121,14 @@ class OpcUaCommObjectGeneratorImpl extends AbstractGenerator {
 	'''
 	CMAKE_MINIMUM_REQUIRED(VERSION 3.5)
 	
-	FIND_PACKAGE(«repo.name» PATHS $ENV{SMART_ROOT_ACE}/modules)
 	FIND_PACKAGE(Open62541Cpp QUIET)
 	SET(SmartSoft_CD_API_DIR $ENV{SMART_ROOT_ACE}/modules)
 	FIND_PACKAGE(SeRoNetSDK QUIET)
+	
+	FIND_FILE(SMART_MACROS SmartMacros2.cmake PATHS $ENV{SMART_ROOT_ACE}/CMakeMacros /opt/smartSoftAce/CMakeMacros)
+	INCLUDE(${SMART_MACROS})
+	INTERNAL_IMPORT_PACKAGE(«repo.name»)
+	
 	«FOR ext: repo.externalRepositories»
 	# find depndency «ext.name»OpcUa
 	FIND_PACKAGE(«ext.name»OpcUa PATHS $ENV{SMART_ROOT_ACE}/modules)

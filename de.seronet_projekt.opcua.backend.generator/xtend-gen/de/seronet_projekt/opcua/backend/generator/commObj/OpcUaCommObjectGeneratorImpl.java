@@ -214,16 +214,22 @@ public class OpcUaCommObjectGeneratorImpl extends AbstractGenerator {
     _builder.append("CMAKE_MINIMUM_REQUIRED(VERSION 3.5)");
     _builder.newLine();
     _builder.newLine();
-    _builder.append("FIND_PACKAGE(");
-    String _name = repo.getName();
-    _builder.append(_name);
-    _builder.append(" PATHS $ENV{SMART_ROOT_ACE}/modules)");
-    _builder.newLineIfNotEmpty();
     _builder.append("FIND_PACKAGE(Open62541Cpp QUIET)");
     _builder.newLine();
     _builder.append("SET(SmartSoft_CD_API_DIR $ENV{SMART_ROOT_ACE}/modules)");
     _builder.newLine();
     _builder.append("FIND_PACKAGE(SeRoNetSDK QUIET)");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("FIND_FILE(SMART_MACROS SmartMacros2.cmake PATHS $ENV{SMART_ROOT_ACE}/CMakeMacros /opt/smartSoftAce/CMakeMacros)");
+    _builder.newLine();
+    _builder.append("INCLUDE(${SMART_MACROS})");
+    _builder.newLine();
+    _builder.append("INTERNAL_IMPORT_PACKAGE(");
+    String _name = repo.getName();
+    _builder.append(_name);
+    _builder.append(")");
+    _builder.newLineIfNotEmpty();
     _builder.newLine();
     {
       Collection<CommObjectsRepository> _externalRepositories = this.getExternalRepositories(repo);

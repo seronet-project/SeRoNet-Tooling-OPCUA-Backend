@@ -175,10 +175,10 @@ public class OpcUaComponentPortFactory {
         {
           boolean _isEventServer = this._opcUaComponentGenHelpers.isEventServer(port_1);
           if (_isEventServer) {
-            _builder.append(", Smart::IEventTestHandler<");
+            _builder.append(", std::shared_ptr<Smart::IEventTestHandler<");
             CharSequence _commObjectCppList = this._opcUaComponentGenHelpers.getCommObjectCppList(port_1, Boolean.valueOf(true));
             _builder.append(_commObjectCppList, "\t");
-            _builder.append("> *");
+            _builder.append(">> ");
             String _nameInstance = this._opcUaComponentGenHelpers.nameInstance(port_1);
             _builder.append(_nameInstance, "\t");
             _builder.append("EventTestHandler");
@@ -384,10 +384,10 @@ public class OpcUaComponentPortFactory {
         {
           boolean _isEventServer = this._opcUaComponentGenHelpers.isEventServer(port_1);
           if (_isEventServer) {
-            _builder.append(", Smart::IEventTestHandler<");
+            _builder.append(", std::shared_ptr<Smart::IEventTestHandler<");
             CharSequence _commObjectCppList = this._opcUaComponentGenHelpers.getCommObjectCppList(port_1, Boolean.valueOf(true));
             _builder.append(_commObjectCppList);
-            _builder.append("> *");
+            _builder.append(">> ");
             String _nameInstance = this._opcUaComponentGenHelpers.nameInstance(port_1);
             _builder.append(_nameInstance);
             _builder.append("EventTestHandler");

@@ -56,7 +56,7 @@ class OpcUaComponentPortFactory {
 		«ENDFOR»
 		
 		«FOR port: component.allServerPorts»
-		virtual «port.portDefinition» * create«port.nameClass»(const std::string &serviceName«IF port.isEventServer», Smart::IEventTestHandler<«port.getCommObjectCppList(true)»> *«port.nameInstance»EventTestHandler«ENDIF») override;
+		virtual «port.portDefinition» * create«port.nameClass»(const std::string &serviceName«IF port.isEventServer», std::shared_ptr<Smart::IEventTestHandler<«port.getCommObjectCppList(true)»>> «port.nameInstance»EventTestHandler«ENDIF») override;
 		«ENDFOR»
 		
 		virtual int onShutdown(const std::chrono::steady_clock::duration &timeoutTime=std::chrono::seconds(2)) override;
@@ -124,7 +124,7 @@ class OpcUaComponentPortFactory {
 	«ENDFOR»
 	
 	«FOR port: component.allServerPorts»
-	«port.portDefinition» * «component.name»OpcUaBackendPortFactory::create«port.nameClass»(const std::string &serviceName«IF port.isEventServer», Smart::IEventTestHandler<«port.getCommObjectCppList(true)»> *«port.nameInstance»EventTestHandler«ENDIF»)
+	«port.portDefinition» * «component.name»OpcUaBackendPortFactory::create«port.nameClass»(const std::string &serviceName«IF port.isEventServer», std::shared_ptr<Smart::IEventTestHandler<«port.getCommObjectCppList(true)»>> «port.nameInstance»EventTestHandler«ENDIF»)
 	{
 		return new «port.portImplementation»(componentImpl, serviceName«IF port.isEventServer», «port.nameInstance»EventTestHandler«ENDIF»);
 	}

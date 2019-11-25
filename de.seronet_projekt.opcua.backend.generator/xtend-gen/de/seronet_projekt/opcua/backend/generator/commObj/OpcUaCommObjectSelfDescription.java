@@ -12,6 +12,7 @@ import org.ecore.base.basicAttributes.AttributeDefinition;
 import org.ecore.base.basicAttributes.InlineEnumerationType;
 import org.ecore.base.basicAttributes.PRIMITIVE_TYPE_NAME;
 import org.ecore.base.basicAttributes.PrimitiveType;
+import org.ecore.base.documentation.AbstractDocumentedElement;
 import org.ecore.service.communicationObject.CommObjectsRepository;
 import org.ecore.service.communicationObject.CommunicationObject;
 import org.ecore.service.communicationObject.CommunicationObjectUtility;
@@ -299,7 +300,7 @@ public class OpcUaCommObjectSelfDescription {
     return _xifexpression;
   }
   
-  public CharSequence getRepoNamespace(final EObject co) {
+  public CharSequence getRepoNamespace(final AbstractDocumentedElement co) {
     if (co instanceof CommunicationObject) {
       return _getRepoNamespace((CommunicationObject)co);
     } else if (co instanceof CommObjectsRepository) {
