@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="de.seronet_projekt.opcua.backend.feature"
+      id="de.seronet_projekt.opcua.backend"
       label="SeRoNet OPCUA-Backend"
       version="1.0.0.qualifier"
       provider-name="SeRoNet (www.seronet-projekt.de)">
