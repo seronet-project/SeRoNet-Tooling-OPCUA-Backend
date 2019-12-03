@@ -43,6 +43,10 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
    </license>
 
+   <url>
+      <update label="SeRoNet OPCUA Backend latest" url="https://web2.servicerobotik-ulm.de/files/SeRoNet_Tooling/updatesites/opcua-backend/latest"/>
+   </url>
+
    <plugin
          id="de.seronet_projekt.opcua.backend.generator"
          download-size="0"
