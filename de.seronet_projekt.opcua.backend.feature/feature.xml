@@ -2,7 +2,7 @@
 <feature
       id="de.seronet_projekt.opcua.backend"
       label="SeRoNet OPCUA-Backend"
-      version="1.0.0.qualifier"
+      version="1.1.0.qualifier"
       provider-name="SeRoNet (www.seronet-projekt.de)">
 
    <description url="http://www.seronet-projekt.de/">
