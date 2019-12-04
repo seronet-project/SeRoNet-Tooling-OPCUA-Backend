@@ -217,8 +217,8 @@ public class OpcUaCommObjectSelfDescription {
         _builder.append("\t");
         _builder.append("\t");
         _builder.append("SelfDescription(&(obj->");
-        String _firstLower = StringExtensions.toFirstLower(attribute.getName());
-        _builder.append(_firstLower, "\t\t");
+        String _name_2 = attribute.getName();
+        _builder.append(_name_2, "\t\t");
         _builder.append("), \"");
         String _firstUpper_1 = StringExtensions.toFirstUpper(attribute.getName());
         _builder.append(_firstUpper_1, "\t\t");
