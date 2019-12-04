@@ -123,7 +123,7 @@ class OpcUaCommObjectSelfDescription {
 			«FOR attribute: co.attributes»
 				// add «attribute.name»
 				ret->add(
-					SelfDescription(&(obj->«attribute.name.toFirstLower»), "«attribute.name.toFirstUpper»")
+					SelfDescription(&(obj->«attribute.name»), "«attribute.name.toFirstUpper»")
 				);
 			«ENDFOR»
 			return ret;
