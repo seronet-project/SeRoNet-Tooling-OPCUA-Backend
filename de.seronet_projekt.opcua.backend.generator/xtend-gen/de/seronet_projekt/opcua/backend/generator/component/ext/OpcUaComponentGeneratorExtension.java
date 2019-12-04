@@ -2,8 +2,11 @@ package de.seronet_projekt.opcua.backend.generator.component.ext;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.ecore.component.componentDefinition.ComponentDefinition;
 import org.ecore.component.componentDefinition.ComponentDefinitionModelUtility;
 import org.ecore.service.communicationObject.CommObjectsRepository;
@@ -43,8 +46,11 @@ public class OpcUaComponentGeneratorExtension implements ComponentGeneratorExten
     _builder.append("#TARGET_LINK_LIBRARIES(${PROJECT_NAME} SeRoNetSDK::SeRoNetSDK)");
     _builder.newLine();
     {
-      HashSet<CommObjectsRepository> _allRelatedRepos = this.getAllRelatedRepos(component);
-      for(final CommObjectsRepository repo : _allRelatedRepos) {
+      final Function1<CommObjectsRepository, String> _function = (CommObjectsRepository it) -> {
+        return it.getName();
+      };
+      List<CommObjectsRepository> _sortBy = IterableExtensions.<CommObjectsRepository, String>sortBy(this.getAllRelatedRepos(component), _function);
+      for(final CommObjectsRepository repo : _sortBy) {
         _builder.append("TARGET_LINK_LIBRARIES(${PROJECT_NAME} ");
         String _name = repo.getName();
         _builder.append(_name);

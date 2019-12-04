@@ -75,7 +75,7 @@ class OpcUaComponentGeneratorImpl extends AbstractGenerator {
 	FIND_PACKAGE(SeRoNetSDK QUIET)
 
 	IF(SeRoNetSDK_FOUND)
-		«FOR repo: component.allRelatedRepos»
+		«FOR repo: component.allRelatedRepos.sortBy[it.name]»
 		FIND_PACKAGE(«repo.name»OpcUa PATHS $ENV{SMART_ROOT_ACE}/modules)
 		«ENDFOR»
 		SET(CMAKE_CXX_STANDARD 14)

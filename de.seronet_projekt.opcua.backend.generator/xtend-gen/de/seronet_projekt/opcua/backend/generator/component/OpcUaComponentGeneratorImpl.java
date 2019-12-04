@@ -4,7 +4,7 @@ import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import de.seronet_projekt.opcua.backend.generator.component.OpcUaComponentGenHelpers;
 import de.seronet_projekt.opcua.backend.generator.component.OpcUaComponentPortFactory;
-import java.util.HashSet;
+import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -12,6 +12,8 @@ import org.eclipse.xtext.generator.AbstractGenerator;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.generator.IGeneratorContext;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.ecore.component.componentDefinition.ComponentDefinition;
 import org.ecore.service.communicationObject.CommObjectsRepository;
@@ -67,8 +69,11 @@ public class OpcUaComponentGeneratorImpl extends AbstractGenerator {
     _builder.append("IF(SeRoNetSDK_FOUND)");
     _builder.newLine();
     {
-      HashSet<CommObjectsRepository> _allRelatedRepos = this._opcUaComponentGenHelpers.getAllRelatedRepos(component);
-      for(final CommObjectsRepository repo : _allRelatedRepos) {
+      final Function1<CommObjectsRepository, String> _function = (CommObjectsRepository it) -> {
+        return it.getName();
+      };
+      List<CommObjectsRepository> _sortBy = IterableExtensions.<CommObjectsRepository, String>sortBy(this._opcUaComponentGenHelpers.getAllRelatedRepos(component), _function);
+      for(final CommObjectsRepository repo : _sortBy) {
         _builder.append("\t");
         _builder.append("FIND_PACKAGE(");
         String _name = repo.getName();

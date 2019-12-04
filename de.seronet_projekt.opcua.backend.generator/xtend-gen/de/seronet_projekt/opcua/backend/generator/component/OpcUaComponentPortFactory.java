@@ -3,9 +3,11 @@ package de.seronet_projekt.opcua.backend.generator.component;
 import com.google.inject.Inject;
 import de.seronet_projekt.opcua.backend.generator.commObj.OpcUaCommObjectSelfDescription;
 import de.seronet_projekt.opcua.backend.generator.component.OpcUaComponentGenHelpers;
-import java.util.Collection;
+import java.util.List;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.ecore.component.componentDefinition.ComponentDefinition;
 import org.ecore.component.componentDefinition.ComponentPort;
 import org.ecore.service.communicationObject.CommunicationObject;
@@ -146,8 +148,11 @@ public class OpcUaComponentPortFactory {
     _builder.newLine();
     _builder.newLine();
     {
-      Iterable<ComponentPort> _allClientPorts = this._opcUaComponentGenHelpers.getAllClientPorts(component);
-      for(final ComponentPort port : _allClientPorts) {
+      final Function1<ComponentPort, String> _function = (ComponentPort it) -> {
+        return it.getName();
+      };
+      List<ComponentPort> _sortBy = IterableExtensions.<ComponentPort, String>sortBy(this._opcUaComponentGenHelpers.getAllClientPorts(component), _function);
+      for(final ComponentPort port : _sortBy) {
         _builder.append("\t");
         _builder.append("virtual ");
         String _portDefinition = this._opcUaComponentGenHelpers.getPortDefinition(port);
@@ -162,8 +167,11 @@ public class OpcUaComponentPortFactory {
     _builder.append("\t");
     _builder.newLine();
     {
-      Iterable<ComponentPort> _allServerPorts = this._opcUaComponentGenHelpers.getAllServerPorts(component);
-      for(final ComponentPort port_1 : _allServerPorts) {
+      final Function1<ComponentPort, String> _function_1 = (ComponentPort it) -> {
+        return it.getName();
+      };
+      List<ComponentPort> _sortBy_1 = IterableExtensions.<ComponentPort, String>sortBy(this._opcUaComponentGenHelpers.getAllServerPorts(component), _function_1);
+      for(final ComponentPort port_1 : _sortBy_1) {
         _builder.append("\t");
         _builder.append("virtual ");
         String _portDefinition_1 = this._opcUaComponentGenHelpers.getPortDefinition(port_1);
@@ -244,8 +252,13 @@ public class OpcUaComponentPortFactory {
     _builder.append("// include referenced CommunicationObject SeRoNetSDK self description implementations");
     _builder.newLine();
     {
-      Collection<CommunicationObject> _allCommObjects = this._opcUaComponentGenHelpers.getAllCommObjects(component);
-      for(final CommunicationObject obj : _allCommObjects) {
+      final Function1<CommunicationObject, String> _function = (CommunicationObject it) -> {
+        CharSequence _repoNamespace = this._opcUaCommObjectSelfDescription.getRepoNamespace(it);
+        String _name = it.getName();
+        return (_repoNamespace + _name);
+      };
+      List<CommunicationObject> _sortBy = IterableExtensions.<CommunicationObject, String>sortBy(this._opcUaComponentGenHelpers.getAllCommObjects(component), _function);
+      for(final CommunicationObject obj : _sortBy) {
         _builder.append("#include \"");
         CharSequence _repoNamespace = this._opcUaCommObjectSelfDescription.getRepoNamespace(obj);
         _builder.append(_repoNamespace);
@@ -343,8 +356,11 @@ public class OpcUaComponentPortFactory {
     _builder.newLine();
     _builder.newLine();
     {
-      Iterable<ComponentPort> _allClientPorts = this._opcUaComponentGenHelpers.getAllClientPorts(component);
-      for(final ComponentPort port : _allClientPorts) {
+      final Function1<ComponentPort, String> _function_1 = (ComponentPort it) -> {
+        return it.getName();
+      };
+      List<ComponentPort> _sortBy_1 = IterableExtensions.<ComponentPort, String>sortBy(this._opcUaComponentGenHelpers.getAllClientPorts(component), _function_1);
+      for(final ComponentPort port : _sortBy_1) {
         String _portDefinition = this._opcUaComponentGenHelpers.getPortDefinition(port);
         _builder.append(_portDefinition);
         _builder.append(" * ");
@@ -370,8 +386,11 @@ public class OpcUaComponentPortFactory {
     }
     _builder.newLine();
     {
-      Iterable<ComponentPort> _allServerPorts = this._opcUaComponentGenHelpers.getAllServerPorts(component);
-      for(final ComponentPort port_1 : _allServerPorts) {
+      final Function1<ComponentPort, String> _function_2 = (ComponentPort it) -> {
+        return it.getName();
+      };
+      List<ComponentPort> _sortBy_2 = IterableExtensions.<ComponentPort, String>sortBy(this._opcUaComponentGenHelpers.getAllServerPorts(component), _function_2);
+      for(final ComponentPort port_1 : _sortBy_2) {
         String _portDefinition_1 = this._opcUaComponentGenHelpers.getPortDefinition(port_1);
         _builder.append(_portDefinition_1);
         _builder.append(" * ");

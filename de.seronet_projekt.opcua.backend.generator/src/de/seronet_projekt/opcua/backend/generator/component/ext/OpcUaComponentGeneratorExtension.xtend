@@ -59,7 +59,7 @@ class OpcUaComponentGeneratorExtension implements ComponentGeneratorExtension {
 	'''
 	IF(SeRoNetSDK_FOUND)
 	#TARGET_LINK_LIBRARIES(${PROJECT_NAME} SeRoNetSDK::SeRoNetSDK)
-	«FOR repo: component.allRelatedRepos»
+	«FOR repo: component.allRelatedRepos.sortBy[it.name]»
 	TARGET_LINK_LIBRARIES(${PROJECT_NAME} «repo.name»OpcUa)
 	«ENDFOR»
 	ENDIF(SeRoNetSDK_FOUND)

@@ -51,11 +51,11 @@ class OpcUaComponentPortFactory {
 		virtual void initialize(«component.nameClass» *component, int argc, char* argv[]) override;
 		virtual int onStartup() override;
 	
-		«FOR port: component.allClientPorts»
+		«FOR port: component.allClientPorts.sortBy[it.name]»
 		virtual «port.portDefinition» * create«port.nameClass»() override;
 		«ENDFOR»
 		
-		«FOR port: component.allServerPorts»
+		«FOR port: component.allServerPorts.sortBy[it.name]»
 		virtual «port.portDefinition» * create«port.nameClass»(const std::string &serviceName«IF port.isEventServer», std::shared_ptr<Smart::IEventTestHandler<«port.getCommObjectCppList(true)»>> «port.nameInstance»EventTestHandler«ENDIF») override;
 		«ENDFOR»
 		
@@ -85,7 +85,7 @@ class OpcUaComponentPortFactory {
 	#include <SeRoNetSDK/SeRoNet/OPCUA/Server/QueryServer.hpp>
 	
 	// include referenced CommunicationObject SeRoNetSDK self description implementations
-	«FOR obj: component.allCommObjects»
+	«FOR obj: component.allCommObjects.sortBy[it.repoNamespace + it.name]»
 	#include "«obj.repoNamespace»OpcUa/«obj.opcUaHeaderFileName»"
 	«ENDFOR»
 	
@@ -115,7 +115,7 @@ class OpcUaComponentPortFactory {
 		return -1;
 	}
 
-	«FOR port: component.allClientPorts»
+	«FOR port: component.allClientPorts.sortBy[it.name]»
 	«port.portDefinition» * «component.name»OpcUaBackendPortFactory::create«port.nameClass»()
 	{
 		return new «port.portImplementation»(componentImpl);
@@ -123,7 +123,7 @@ class OpcUaComponentPortFactory {
 	
 	«ENDFOR»
 	
-	«FOR port: component.allServerPorts»
+	«FOR port: component.allServerPorts.sortBy[it.name]»
 	«port.portDefinition» * «component.name»OpcUaBackendPortFactory::create«port.nameClass»(const std::string &serviceName«IF port.isEventServer», std::shared_ptr<Smart::IEventTestHandler<«port.getCommObjectCppList(true)»>> «port.nameInstance»EventTestHandler«ENDIF»)
 	{
 		return new «port.portImplementation»(componentImpl, serviceName«IF port.isEventServer», «port.nameInstance»EventTestHandler«ENDIF»);
