@@ -58,7 +58,8 @@ class OpcUaComponentGeneratorExtension implements ComponentGeneratorExtension {
 	override getCMakeTargetConfiguration(ComponentDefinition component)
 	'''
 	IF(SeRoNetSDK_FOUND)
-	#TARGET_LINK_LIBRARIES(${PROJECT_NAME} SeRoNetSDK::SeRoNetSDK)
+	# SeRoNetSDK has to be linked at the minimum (in case the component does not have any ports specified for any reason)
+	TARGET_LINK_LIBRARIES(${PROJECT_NAME} SeRoNetSDK::SeRoNetSDK)
 	«FOR repo: component.allRelatedRepos.sortBy[it.name]»
 	TARGET_LINK_LIBRARIES(${PROJECT_NAME} «repo.name»OpcUa)
 	«ENDFOR»

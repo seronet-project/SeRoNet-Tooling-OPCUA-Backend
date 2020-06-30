@@ -43,7 +43,9 @@ public class OpcUaComponentGeneratorExtension implements ComponentGeneratorExten
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("IF(SeRoNetSDK_FOUND)");
     _builder.newLine();
-    _builder.append("#TARGET_LINK_LIBRARIES(${PROJECT_NAME} SeRoNetSDK::SeRoNetSDK)");
+    _builder.append("# SeRoNetSDK has to be linked at the minimum (in case the component does not have any ports specified for any reason)");
+    _builder.newLine();
+    _builder.append("TARGET_LINK_LIBRARIES(${PROJECT_NAME} SeRoNetSDK::SeRoNetSDK)");
     _builder.newLine();
     {
       final Function1<CommObjectsRepository, String> _function = (CommObjectsRepository it) -> {
